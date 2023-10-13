@@ -1,15 +1,19 @@
 package model;
 
 public class Estabelecimento {
-	
+
 	Integer identificador;
-	
+
 	String nome;
-	
+
+	String cnpj;
+
 	String endereco;
-	
+
+	String telefone;
+
 	Integer quantidadeVagasMotos;
-	
+
 	Integer quantidadeVagasCarros;
 
 	public Estabelecimento(String nome, String endereco, Integer quantidadeVagasMotos, Integer quantidadeVagasCarros) {
@@ -42,5 +46,5 @@ public class Estabelecimento {
 	public void setQuantidadeVagasCarros(Integer quantidadeVagasCarros) {
 		this.quantidadeVagasCarros = quantidadeVagasCarros;
 	}
-	
+
 }
