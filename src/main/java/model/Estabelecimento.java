@@ -2,6 +2,8 @@ package model;
 
 public class Estabelecimento {
 	
+	Integer identificador;
+	
 	String nome;
 	
 	String endereco;
