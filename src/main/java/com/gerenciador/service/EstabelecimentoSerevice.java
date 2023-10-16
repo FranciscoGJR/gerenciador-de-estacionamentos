@@ -1,11 +1,11 @@
-package service;
+package com.gerenciador.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import model.Estabelecimento;
-import repository.EstabelecimentoRepository;
+import com.gerenciador.model.Estabelecimento;
+import com.gerenciador.repository.EstabelecimentoRepository;
 
 public class EstabelecimentoSerevice {
 	

@@ -1,4 +1,4 @@
-package model;
+package com.gerenciador.model;
 
 import javax.validation.constraints.NotNull;
 
