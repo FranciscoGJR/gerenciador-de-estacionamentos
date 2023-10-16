@@ -10,7 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.gerenciador.model.Estabelecimento;
 import com.gerenciador.repository.EstabelecimentoRepository;
-import com.gerenciador.service.EstabelecimentoSerevice;
+import com.gerenciador.service.EstabelecimentoService;
 
 @ExtendWith(MockitoExtension.class)
 public class EstabelecimentoServiceTest {
@@ -19,7 +19,7 @@ public class EstabelecimentoServiceTest {
 	private EstabelecimentoRepository estabelecimentoRepository;
 	
 	@InjectMocks
-	EstabelecimentoSerevice estabelecimentoService;
+	EstabelecimentoService estabelecimentoService;
 	
 	@Test
 	@DisplayName("Salvar quando ja existir um estabelecimento com esse cnpj")
