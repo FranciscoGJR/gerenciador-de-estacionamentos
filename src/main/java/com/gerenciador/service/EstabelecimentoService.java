@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.gerenciador.model.Estabelecimento;
 import com.gerenciador.repository.EstabelecimentoRepository;
 
+@Service
 public class EstabelecimentoService {
 
 	@Autowired
@@ -29,7 +31,6 @@ public class EstabelecimentoService {
 	public Estabelecimento update(Estabelecimento estabelecimento, Integer id) {
 		estabelecimento.setIdentificador(id);
 		return estabelecimentoRepository.save(estabelecimento);
-		
 	}
 
 	public void delete(Integer id) {
