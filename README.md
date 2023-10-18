@@ -27,7 +27,6 @@ Os estabelecimentos possuem os seguintes campos:
 - Telefone;
 - Quantidade de vagas para motos;
 - Quantidade de vagas para carros.
-- Todos os campos são de preenchimento obrigatório.
 
 ## Veículos
 Os veículos possuem os seguintes campos:
@@ -37,7 +36,6 @@ Os veículos possuem os seguintes campos:
 - Cor;
 - Placa;
 - Tipo.
-- Todos os campos são de preenchimento obrigatório.
 
 # Chamadas dos Serviços
 
