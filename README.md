@@ -37,34 +37,34 @@ Os veículos possuem os seguintes campos:
 - Placa;
 - Tipo.
 
-# Chamadas dos Serviços
+# Rotas do sistema
 
-## Estabelecimento
-> GET /estabelecimentos: Retorna a lista de todos os estabelecimentos cadastrados.
+1. Estabelecimento
 
-> GET /estabelecimentos/id: Retorna os detalhes de um estabelecimento específico pelo ID.
+1.1. GET /estabelecimentos: Retorna a lista de todos os estabelecimentos cadastrados.
 
-> POST /estabelecimentos: Cria um novo estabelecimento.
+1.2. GET /estabelecimentos/id: Retorna os detalhes de um estabelecimento específico pelo ID.
 
-> PUT /estabelecimentos/id: Atualiza os dados de um estabelecimento existente.
+1.3. POST /estabelecimentos: Cria um novo estabelecimento.
 
-> DELETE /estabelecimentos/id: Remove um estabelecimento existente.
+1.4. PUT /estabelecimentos/id: Atualiza os dados de um estabelecimento existente.
 
-## Veículos
-> GET /veiculos: Retorna a lista de todos os veículos cadastrados.
+1.5. DELETE /estabelecimentos/id: Remove um estabelecimento existente.
 
-> GET /veiculos/id: Retorna os detalhes de um veículo específico pelo ID.
+2. Veículos
 
-> POST /veiculos: Cria um novo veículo.
+2.1. GET /veiculos: Retorna a lista de todos os veículos cadastrados.
 
-> PUT /veiculos/id: Atualiza os dados de um veículo existente.
+2.2. GET /veiculos/id: Retorna os detalhes de um veículo específico pelo ID.
 
-> DELETE /veiculos/id: Remove um veículo existente.
+2.3. POST /veiculos: Cria um novo veículo.
 
-## Controle de Entrada e Saída de Veículos
-> POST /controle/entrada: Registra a entrada de um veículo no estabelecimento.
-> POST /controle/saida: Registra a saída de um veículo do estabelecimento.
+2.4. PUT /veiculos/id: Atualiza os dados de um veículo existente.
 
-# Configuração
----
+2.5. DELETE /veiculos/id: Remove um veículo existente.
+
+3. Controle de Entrada e Saída de Veículos
+3.1. POST /controle/entrada: Registra a entrada de um veículo no estabelecimento.
+
+3.2. POST /controle/saida: Registra a saída de um veículo do estabelecimento.
 
