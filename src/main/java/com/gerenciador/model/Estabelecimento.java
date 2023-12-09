@@ -117,4 +117,8 @@ public class Estabelecimento implements Serializable {
 		this.motosEstacionadas = motosEstacionadas;
 	}
 
+	public Integer getQuantidadeVagasMotos() {
+		return quantidadeVagasMotos;
+	}
+
 }
