@@ -1,6 +1,7 @@
 package com.gerenciador.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Estabelecimento implements Serializable{
@@ -17,9 +19,9 @@ public class Estabelecimento implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "identificador")
+	@Column(name = "estabelecimento_identificador")
 	@NotNull
-	Integer identificador;
+	Integer estabelecimentoIdentificador;
 
 	@Column(name = "nome", length = 32, nullable = false)
 	@NotNull
@@ -41,9 +43,15 @@ public class Estabelecimento implements Serializable{
 	@NotNull
 	Integer quantidadeVagasMotos;
 
-	@Column(name = "quantidade_vagas_carros")
+	@Column(name = "quantidade_vagas_carros", nullable = false)
 	@NotNull
 	Integer quantidadeVagasCarros;
+	
+    @OneToMany(mappedBy = "estabelecimentoAtual")
+    private List<Veiculo> carrosEstacionados;
+
+    @OneToMany(mappedBy = "estabelecimentoAtual")
+    private List<Veiculo> motosEstacionadas;
 
 	public Estabelecimento() {
 
@@ -52,21 +60,21 @@ public class Estabelecimento implements Serializable{
 	public Estabelecimento(@NotNull Integer identificador, @NotNull String nome, @NotNull String cnpj,
 			@NotNull String endereco, @NotNull String telefone, @NotNull Integer quantidadeVagasMotos,
 			@NotNull Integer quantidadeVagasCarros) {
-		this.identificador = identificador;
+		this.estabelecimentoIdentificador = identificador;
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.endereco = endereco;
 		this.telefone = telefone;
-		this.quantidadeVagasMotos = quantidadeVagasMotos;
-		this.quantidadeVagasCarros = quantidadeVagasCarros;
+		this.quantidadeVagasMotos= quantidadeVagasMotos;
+		this.quantidadeVagasCarros= quantidadeVagasCarros;
 	}
 
 	public Integer getIdentificador() {
-		return identificador;
+		return estabelecimentoIdentificador;
 	}
 
 	public void setIdentificador(Integer identificador) {
-		this.identificador = identificador;
+		this.estabelecimentoIdentificador = identificador;
 	}
 
 	public String getNome() {

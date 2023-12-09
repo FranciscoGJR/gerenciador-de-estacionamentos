@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,9 +17,9 @@ public class Veiculo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "identificador")
+	@Column(name = "veiculo_identificador")
 	@NotNull
-	Integer identificador;
+	Integer veiculoIdentificador;
 
 	@Column(name = "marca_do_veiculo", length = 32, nullable = false)
 	@NotNull
@@ -33,9 +35,13 @@ public class Veiculo {
 
 	@Column(name = "tipo_do_veiculo", nullable = false)
 	@NotNull
-	TipoVeiculo tipo;
+	String tipo;
+	
+    @ManyToOne
+    @JoinColumn(name = "estabelecimentoIdentificador")
+    private Estabelecimento estabelecimentoAtual;
 
-	public Veiculo(String marca, String cor, String placa, TipoVeiculo tipo) {
+	public Veiculo(String marca, String cor, String placa, String tipo) {
 		this.marca = marca;
 		this.cor = cor;
 		this.placa = placa;
@@ -43,11 +49,11 @@ public class Veiculo {
 	}
 
 	public Integer getIdentificador() {
-		return identificador;
+		return veiculoIdentificador;
 	}
 
 	public void setIdentificador(Integer identificador) {
-		this.identificador = identificador;
+		this.veiculoIdentificador = identificador;
 	}
 
 	public String getMarca() {
@@ -74,11 +80,11 @@ public class Veiculo {
 		this.placa = placa;
 	}
 
-	public TipoVeiculo getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TipoVeiculo tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
