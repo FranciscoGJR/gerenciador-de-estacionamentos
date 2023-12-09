@@ -13,7 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Estabelecimento implements Serializable{
+public class Estabelecimento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,12 +46,12 @@ public class Estabelecimento implements Serializable{
 	@Column(name = "quantidade_vagas_carros", nullable = false)
 	@NotNull
 	Integer quantidadeVagasCarros;
-	
-    @OneToMany(mappedBy = "estabelecimentoAtual")
-    private List<Veiculo> carrosEstacionados;
 
-    @OneToMany(mappedBy = "estabelecimentoAtual")
-    private List<Veiculo> motosEstacionadas;
+	@OneToMany(mappedBy = "estabelecimentoAtual")
+	private List<Veiculo> carrosEstacionados;
+
+	@OneToMany(mappedBy = "estabelecimentoAtual")
+	private List<Veiculo> motosEstacionadas;
 
 	public Estabelecimento() {
 
@@ -65,8 +65,8 @@ public class Estabelecimento implements Serializable{
 		this.cnpj = cnpj;
 		this.endereco = endereco;
 		this.telefone = telefone;
-		this.quantidadeVagasMotos= quantidadeVagasMotos;
-		this.quantidadeVagasCarros= quantidadeVagasCarros;
+		this.quantidadeVagasMotos = quantidadeVagasMotos;
+		this.quantidadeVagasCarros = quantidadeVagasCarros;
 	}
 
 	public Integer getIdentificador() {
@@ -99,6 +99,22 @@ public class Estabelecimento implements Serializable{
 
 	public void setQuantidadeVagasCarros(Integer quantidadeVagasCarros) {
 		this.quantidadeVagasCarros = quantidadeVagasCarros;
+	}
+
+	public List<Veiculo> getCarrosEstacionados() {
+		return carrosEstacionados;
+	}
+
+	public void setCarrosEstacionados(List<Veiculo> carrosEstacionados) {
+		this.carrosEstacionados = carrosEstacionados;
+	}
+
+	public List<Veiculo> getMotosEstacionadas() {
+		return motosEstacionadas;
+	}
+
+	public void setMotosEstacionadas(List<Veiculo> motosEstacionadas) {
+		this.motosEstacionadas = motosEstacionadas;
 	}
 
 }
