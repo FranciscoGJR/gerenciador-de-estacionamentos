@@ -73,7 +73,7 @@ public class Estabelecimento implements Serializable {
 		return carrosEstacionados.add(novoVeiculo);
 	}
 	
-	public boolean atualizarMotoEstacionada(Veiculo novoVeiculo) {
+	public boolean adicionarMotoEstacionada(Veiculo novoVeiculo) {
 		return motosEstacionadas.add(novoVeiculo);
 	}
 

@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 import com.gerenciador.model.Estabelecimento;
 import com.gerenciador.model.Veiculo;
 import com.gerenciador.repository.EstabelecimentoRepository;
+import com.gerenciador.repository.VeiculoRepository;
 
 @Service
 public class EstabelecimentoService {
 
 	@Autowired
 	EstabelecimentoRepository estabelecimentoRepository;
+
+	@Autowired
+	VeiculoRepository veiculoRepository;
 
 	public Estabelecimento save(Estabelecimento estabelecimento) {
 		return estabelecimentoRepository.save(estabelecimento);
@@ -40,12 +44,27 @@ public class EstabelecimentoService {
 
 	public void registrarEntradaDeVeiculo(Estabelecimento estabelecimento, Veiculo veiculo) {
 
-		// TO-DO: verificar se o veiculo esta estacionado
+		if (veiculo.getEstabelecimentoAtual() == estabelecimento) {
+			// TO-DO: lancar excecao veiculo ja estacionado
+		}
 
-		if (temVagaDisponivel(estabelecimento, veiculo)) {
+		if (!temVagaDisponivel(estabelecimento, veiculo)) {
+			// TO-DO: lancar excecao nao tem vaga dispobivel no estacionamento
+		}
 
-			// TO-DO: atualizar Estabelecimento.carrosEstacionados ou
-			// TO-DO: atualizar Veiculo.estabelecimentoAtual
+		atualizarEstacionamento(estabelecimento, veiculo);
+
+		veiculo.setEstabelecimentoAtual(estabelecimento);
+
+	}
+
+	private void atualizarEstacionamento(Estabelecimento estabelecimento, Veiculo veiculo) {
+		if (veiculo.getTipo().equals("CARRO")) {
+			estabelecimento.adicionarCarroEstacionado(veiculo);
+		}
+
+		if (veiculo.getTipo().equals("MOTO")) {
+			estabelecimento.adicionarMotoEstacionada(veiculo);
 		}
 
 	}
