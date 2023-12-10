@@ -36,10 +36,10 @@ public class Veiculo {
 	@Column(name = "tipo_do_veiculo", nullable = false)
 	@NotNull
 	String tipo;
-	
-    @ManyToOne
-    @JoinColumn(name = "estabelecimentoIdentificador")
-    private Estabelecimento estabelecimentoAtual;
+
+	@ManyToOne
+	@JoinColumn(name = "estabelecimentoIdentificador")
+	private Estabelecimento estabelecimentoAtual;
 
 	public Veiculo(String marca, String cor, String placa, String tipo) {
 		this.marca = marca;
@@ -86,6 +86,14 @@ public class Veiculo {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public Estabelecimento getEstabelecimentoAtual() {
+		return estabelecimentoAtual;
+	}
+
+	public void setEstabelecimentoAtual(Estabelecimento estabelecimentoAtual) {
+		this.estabelecimentoAtual = estabelecimentoAtual;
 	}
 
 }
