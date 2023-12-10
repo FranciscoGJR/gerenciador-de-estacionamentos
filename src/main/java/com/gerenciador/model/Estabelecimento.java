@@ -52,7 +52,7 @@ public class Estabelecimento implements Serializable {
 
 	@OneToMany(mappedBy = "estabelecimentoAtual")
 	private List<Veiculo> motosEstacionadas;
-
+	
 	public Estabelecimento() {
 
 	}
@@ -67,6 +67,14 @@ public class Estabelecimento implements Serializable {
 		this.telefone = telefone;
 		this.quantidadeVagasMotos = quantidadeVagasMotos;
 		this.quantidadeVagasCarros = quantidadeVagasCarros;
+	}
+	
+	public boolean adicionarCarroEstacionado(Veiculo novoVeiculo) {
+		return carrosEstacionados.add(novoVeiculo);
+	}
+	
+	public boolean atualizarMotoEstacionada(Veiculo novoVeiculo) {
+		return motosEstacionadas.add(novoVeiculo);
 	}
 
 	public Integer getIdentificador() {
