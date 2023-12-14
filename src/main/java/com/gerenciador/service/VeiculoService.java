@@ -10,10 +10,10 @@ import com.gerenciador.repository.VeiculoRepository;
 
 @Service
 public class VeiculoService {
-	
+
 	@Autowired
 	private VeiculoRepository veiculoRepository;
-	
+
 	public List<Veiculo> getVeiculo() {
 		return null;
 	}
@@ -22,8 +22,8 @@ public class VeiculoService {
 		return null;
 	}
 
-	public Veiculo findById() {
-		return null;
+	public Veiculo findById(Integer id) {
+		return veiculoRepository.findById(id).orElse(null);
 	}
 
 	public List<Veiculo> findByNome() {

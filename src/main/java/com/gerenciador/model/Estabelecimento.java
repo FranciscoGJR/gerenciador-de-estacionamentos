@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -47,9 +49,11 @@ public class Estabelecimento implements Serializable {
 	@NotNull
 	Integer quantidadeVagasCarros;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "estabelecimentoAtual")
 	private List<Veiculo> carrosEstacionados;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "estabelecimentoAtual")
 	private List<Veiculo> motosEstacionadas;
 	

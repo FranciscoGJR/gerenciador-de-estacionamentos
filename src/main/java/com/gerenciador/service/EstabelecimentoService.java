@@ -1,7 +1,6 @@
 package com.gerenciador.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.gerenciador.model.Estabelecimento;
 import com.gerenciador.model.Veiculo;
 import com.gerenciador.repository.EstabelecimentoRepository;
-import com.gerenciador.repository.VeiculoRepository;
 
 @Service
 public class EstabelecimentoService {
@@ -18,7 +16,7 @@ public class EstabelecimentoService {
 	EstabelecimentoRepository estabelecimentoRepository;
 
 	@Autowired
-	VeiculoRepository veiculoRepository;
+	VeiculoService veiculoService;
 
 	public Estabelecimento save(Estabelecimento estabelecimento) {
 		return estabelecimentoRepository.save(estabelecimento);
@@ -29,8 +27,8 @@ public class EstabelecimentoService {
 	}
 
 	public Estabelecimento findById(Integer id) {
-		Optional<Estabelecimento> estabelecimento = estabelecimentoRepository.findById(id);
-		return estabelecimento.orElse(null);
+		Estabelecimento estabelecimento = estabelecimentoRepository.findById(id).orElseThrow();
+		return estabelecimento;
 	}
 
 	public Estabelecimento update(Estabelecimento estabelecimento, Integer id) {
@@ -42,10 +40,13 @@ public class EstabelecimentoService {
 		estabelecimentoRepository.deleteById(id);
 	}
 
-	public void registrarEntradaDeVeiculo(Estabelecimento estabelecimento, Veiculo veiculo) {
+	public Veiculo registrarEntradaDeVeiculo(Integer idEstabelecimento, Integer idVeiculo) {
+
+		Estabelecimento estabelecimento = findById(idEstabelecimento);
+		Veiculo veiculo = veiculoService.findById(idVeiculo);
 
 		if (veiculo.getEstabelecimentoAtual() == estabelecimento) {
-			// TO-DO: lancar excecao veiculo ja estacionado
+			// TO-DO: lancar excecao veiculo ja estacionado no estabelecimento atual
 		}
 
 		if (!temVagaDisponivel(estabelecimento, veiculo)) {
@@ -55,6 +56,8 @@ public class EstabelecimentoService {
 		atualizarEstacionamento(estabelecimento, veiculo);
 
 		veiculo.setEstabelecimentoAtual(estabelecimento);
+
+		return veiculo;
 
 	}
 
@@ -70,13 +73,13 @@ public class EstabelecimentoService {
 	}
 
 	private boolean temVagaDisponivel(Estabelecimento estabelecimento, Veiculo veiculo) {
-
 		if (veiculo.getTipo().equals("CARRO")) {
 			Integer quantidadeCarrosEstacionados = estabelecimento.getCarrosEstacionados().size();
 			Integer quantidadeMaximaCarros = estabelecimento.getQuantidadeVagasCarros();
 
-			if (quantidadeCarrosEstacionados == quantidadeMaximaCarros)
+			if (quantidadeCarrosEstacionados == quantidadeMaximaCarros) {
 				return false;
+			}
 			return true;
 		}
 
@@ -84,8 +87,9 @@ public class EstabelecimentoService {
 			Integer quantidadeMotosEstacionadas = estabelecimento.getMotosEstacionadas().size();
 			Integer quantidadeMaximaMotos = estabelecimento.getQuantidadeVagasMotos();
 
-			if (quantidadeMotosEstacionadas == quantidadeMaximaMotos)
+			if (quantidadeMotosEstacionadas == quantidadeMaximaMotos) {
 				return false;
+			}
 			return true;
 		}
 

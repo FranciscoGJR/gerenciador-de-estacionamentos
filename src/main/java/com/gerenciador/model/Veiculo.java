@@ -2,6 +2,8 @@ package com.gerenciador.model;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,9 +39,13 @@ public class Veiculo {
 	@NotNull
 	String tipo;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "estabelecimentoIdentificador")
 	private Estabelecimento estabelecimentoAtual;
+	
+	public Veiculo() {
+	}
 
 	public Veiculo(String marca, String cor, String placa, String tipo) {
 		this.marca = marca;
