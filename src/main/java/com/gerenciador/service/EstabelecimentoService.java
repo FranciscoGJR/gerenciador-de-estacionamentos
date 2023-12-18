@@ -41,16 +41,19 @@ public class EstabelecimentoService {
 	}
 
 	public Veiculo registrarEntradaDeVeiculo(Integer idEstabelecimento, Integer idVeiculo) {
-
 		Estabelecimento estabelecimento = findById(idEstabelecimento);
 		Veiculo veiculo = veiculoService.findById(idVeiculo);
-
+		
 		if (veiculo.getEstabelecimentoAtual() == estabelecimento) {
-			// TO-DO: lancar excecao veiculo ja estacionado no estabelecimento atual
+			throw new IllegalArgumentException("Veiculo ja estacionado no estabelecimento atual");
 		}
-
+		
+		if(veiculo.getEstabelecimentoAtual() != null) {
+			throw new IllegalArgumentException("Veiculo ja estacionado");
+		}
+		
 		if (!temVagaDisponivel(estabelecimento, veiculo)) {
-			// TO-DO: lancar excecao nao tem vaga dispobivel no estacionamento
+			throw new IllegalArgumentException("Estacionamento sem vaga disponível");
 		}
 
 		atualizarEstacionamento(estabelecimento, veiculo);
@@ -72,7 +75,7 @@ public class EstabelecimentoService {
 
 	}
 
-	private boolean temVagaDisponivel(Estabelecimento estabelecimento, Veiculo veiculo) {
+	public boolean temVagaDisponivel(Estabelecimento estabelecimento, Veiculo veiculo) {
 		if (veiculo.getTipo().equals("CARRO")) {
 			Integer quantidadeCarrosEstacionados = estabelecimento.getCarrosEstacionados().size();
 			Integer quantidadeMaximaCarros = estabelecimento.getQuantidadeVagasCarros();
