@@ -70,11 +70,11 @@ public class EstabelecimentoService {
 
 	private void atualizarEstacionamento(Estabelecimento estabelecimento, Veiculo veiculo) {
 		if (veiculo.getTipo().equals("CARRO")) {
-			estabelecimento.adicionarCarroEstacionado(veiculo);
+			estabelecimento.carrosEstacionados.add(veiculo);
 		}
 
 		if (veiculo.getTipo().equals("MOTO")) {
-			estabelecimento.adicionarMotoEstacionada(veiculo);
+			estabelecimento.motosEstacionadas.add(veiculo);
 		}
 
 	}

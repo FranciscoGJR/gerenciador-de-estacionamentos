@@ -52,11 +52,11 @@ public class Estabelecimento implements Serializable {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "estabelecimentoAtual")
-	private List<Veiculo> carrosEstacionados;
+	public List<Veiculo> carrosEstacionados;
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "estabelecimentoAtual")
-	private List<Veiculo> motosEstacionadas;
+	public List<Veiculo> motosEstacionadas;
 
 	public Estabelecimento() {
 
