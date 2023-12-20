@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gerenciador.exception.EstacionamentoSemVagaVisponívelException;
+import com.gerenciador.exception.VeiculoJaEstacionadoException;
 import com.gerenciador.model.Estabelecimento;
 import com.gerenciador.model.Veiculo;
 import com.gerenciador.repository.EstabelecimentoRepository;
@@ -44,20 +46,20 @@ public class EstabelecimentoService {
 		estabelecimentoRepository.deleteById(id);
 	}
 
-	public Veiculo registrarEntradaDeVeiculo(Integer idEstabelecimento, Integer idVeiculo) {
+	public Veiculo registrarEntradaDeVeiculo(Integer idEstabelecimento, Integer idVeiculo) throws Exception {
 		Estabelecimento estabelecimento = findById(idEstabelecimento);
 		Veiculo veiculo = veiculoRepository.findById(idVeiculo).orElse(null);
 		
 		if (veiculo.getEstabelecimentoAtual() == estabelecimento) {
-			throw new IllegalArgumentException("Veiculo ja estacionado no estabelecimento atual");
+			throw new VeiculoJaEstacionadoException();
 		}
 		
 		if(veiculo.getEstabelecimentoAtual() != null) {
-			throw new IllegalArgumentException("Veiculo ja estacionado");
+			throw new VeiculoJaEstacionadoException();
 		}
 		
 		if (!temVagaDisponivel(estabelecimento, veiculo)) {
-			throw new IllegalArgumentException("Estacionamento sem vaga disponível");
+			throw new EstacionamentoSemVagaVisponívelException();
 		}
 
 		atualizarEstacionamento(estabelecimento, veiculo);

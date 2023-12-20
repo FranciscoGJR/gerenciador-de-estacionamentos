@@ -51,7 +51,7 @@ public class EstabelecimentoServiceTest {
 	}
 
 	@Test
-	public void testRegistrarEntradaDeVeiculo() {
+	public void testRegistrarEntradaDeVeiculo() throws Exception {
 
 		when(estabelecimentoRepository.findById(estabelecimento.getIdentificador())).thenReturn(optionalEstabelecimento);
 		when(veiculoRepository.findById(veiculo.getIdentificador())).thenReturn(optionalVeiculo);

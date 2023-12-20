@@ -23,7 +23,7 @@ public class EstabeleciementoController {
 
 	@PutMapping("/entrada/{idEstabeleciemento}/{idVeiculo}")
 	public Veiculo entradaDeVeiculo(@PathVariable("idEstabeleciemento") Integer idEstabeleciemento,
-			@PathVariable("idVeiculo") Integer idVeiculo) {
+			@PathVariable("idVeiculo") Integer idVeiculo) throws Exception {
 
 		return estabelecimentoService.registrarEntradaDeVeiculo(idEstabeleciemento, idVeiculo);
 	}
