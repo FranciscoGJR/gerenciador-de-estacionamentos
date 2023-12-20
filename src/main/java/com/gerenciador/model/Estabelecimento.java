@@ -1,6 +1,7 @@
 package com.gerenciador.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -56,27 +57,30 @@ public class Estabelecimento implements Serializable {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "estabelecimentoAtual")
 	private List<Veiculo> motosEstacionadas;
-	
+
 	public Estabelecimento() {
 
 	}
 
-	public Estabelecimento(@NotNull Integer identificador, @NotNull String nome, @NotNull String cnpj,
+	public Estabelecimento(@NotNull Integer estabelecimentoIdentificador, @NotNull String nome, @NotNull String cnpj,
 			@NotNull String endereco, @NotNull String telefone, @NotNull Integer quantidadeVagasMotos,
 			@NotNull Integer quantidadeVagasCarros) {
-		this.estabelecimentoIdentificador = identificador;
+		super();
+		this.estabelecimentoIdentificador = estabelecimentoIdentificador;
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.endereco = endereco;
 		this.telefone = telefone;
 		this.quantidadeVagasMotos = quantidadeVagasMotos;
 		this.quantidadeVagasCarros = quantidadeVagasCarros;
+		this.carrosEstacionados = new ArrayList<>();
+		this.motosEstacionadas = new ArrayList<>();
 	}
-	
+
 	public boolean adicionarCarroEstacionado(Veiculo novoVeiculo) {
 		return carrosEstacionados.add(novoVeiculo);
 	}
-	
+
 	public boolean adicionarMotoEstacionada(Veiculo novoVeiculo) {
 		return motosEstacionadas.add(novoVeiculo);
 	}

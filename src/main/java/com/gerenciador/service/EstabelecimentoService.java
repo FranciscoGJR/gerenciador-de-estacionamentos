@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.gerenciador.model.Estabelecimento;
 import com.gerenciador.model.Veiculo;
 import com.gerenciador.repository.EstabelecimentoRepository;
+import com.gerenciador.repository.VeiculoRepository;
 
 @Service
 public class EstabelecimentoService {
@@ -17,6 +18,9 @@ public class EstabelecimentoService {
 
 	@Autowired
 	VeiculoService veiculoService;
+	
+	@Autowired
+	VeiculoRepository veiculoRepository;
 
 	public Estabelecimento save(Estabelecimento estabelecimento) {
 		return estabelecimentoRepository.save(estabelecimento);
@@ -42,7 +46,7 @@ public class EstabelecimentoService {
 
 	public Veiculo registrarEntradaDeVeiculo(Integer idEstabelecimento, Integer idVeiculo) {
 		Estabelecimento estabelecimento = findById(idEstabelecimento);
-		Veiculo veiculo = veiculoService.findById(idVeiculo);
+		Veiculo veiculo = veiculoRepository.findById(idVeiculo).orElse(null);
 		
 		if (veiculo.getEstabelecimentoAtual() == estabelecimento) {
 			throw new IllegalArgumentException("Veiculo ja estacionado no estabelecimento atual");

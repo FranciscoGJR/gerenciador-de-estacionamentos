@@ -44,6 +44,18 @@ public class Veiculo {
 	@JoinColumn(name = "estabelecimentoIdentificador")
 	private Estabelecimento estabelecimentoAtual;
 	
+	
+	
+	public Veiculo(@NotNull Integer veiculoIdentificador, @NotNull String marca, @NotNull String cor,
+			@NotNull String placa, @NotNull String tipo, Estabelecimento estabelecimentoAtual) {
+		this.veiculoIdentificador = veiculoIdentificador;
+		this.marca = marca;
+		this.cor = cor;
+		this.placa = placa;
+		this.tipo = tipo;
+		this.estabelecimentoAtual = estabelecimentoAtual;
+	}
+
 	public Veiculo() {
 	}
 
