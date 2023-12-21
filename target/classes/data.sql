@@ -11,4 +11,4 @@ VALUES
   (3, 'Marca 3', 'Preto', 'DEF456', 'CARRO', 2),
   (4, 'Marca 4', 'Branco', 'HIJ789', 'MOTO', 2),
   (5, 'Marca 5', 'Verde', 'JKL012', 'CARRO', 3),
-  (6, 'Marca 6', 'Amarelo', 'MNO345', 'MOTO', 3);
+  (6, 'Marca 6', 'Amarelo', 'MNO345', 'MOTO', null);

@@ -1,9 +1,12 @@
 package com.gerenciador.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Estabelecimento implements Serializable{
+public class Estabelecimento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,27 +49,40 @@ public class Estabelecimento implements Serializable{
 	@Column(name = "quantidade_vagas_carros", nullable = false)
 	@NotNull
 	Integer quantidadeVagasCarros;
-	
-    @OneToMany(mappedBy = "estabelecimentoAtual")
-    private List<Veiculo> carrosEstacionados;
 
-    @OneToMany(mappedBy = "estabelecimentoAtual")
-    private List<Veiculo> motosEstacionadas;
+	@JsonManagedReference
+	@OneToMany(mappedBy = "estabelecimentoAtual")
+	public List<Veiculo> carrosEstacionados;
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "estabelecimentoAtual")
+	public List<Veiculo> motosEstacionadas;
 
 	public Estabelecimento() {
 
 	}
 
-	public Estabelecimento(@NotNull Integer identificador, @NotNull String nome, @NotNull String cnpj,
+	public Estabelecimento(@NotNull Integer estabelecimentoIdentificador, @NotNull String nome, @NotNull String cnpj,
 			@NotNull String endereco, @NotNull String telefone, @NotNull Integer quantidadeVagasMotos,
 			@NotNull Integer quantidadeVagasCarros) {
-		this.estabelecimentoIdentificador = identificador;
+		super();
+		this.estabelecimentoIdentificador = estabelecimentoIdentificador;
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.endereco = endereco;
 		this.telefone = telefone;
-		this.quantidadeVagasMotos= quantidadeVagasMotos;
-		this.quantidadeVagasCarros= quantidadeVagasCarros;
+		this.quantidadeVagasMotos = quantidadeVagasMotos;
+		this.quantidadeVagasCarros = quantidadeVagasCarros;
+		this.carrosEstacionados = new ArrayList<>();
+		this.motosEstacionadas = new ArrayList<>();
+	}
+
+	public boolean adicionarCarroEstacionado(Veiculo novoVeiculo) {
+		return carrosEstacionados.add(novoVeiculo);
+	}
+
+	public boolean adicionarMotoEstacionada(Veiculo novoVeiculo) {
+		return motosEstacionadas.add(novoVeiculo);
 	}
 
 	public Integer getIdentificador() {
@@ -99,6 +115,26 @@ public class Estabelecimento implements Serializable{
 
 	public void setQuantidadeVagasCarros(Integer quantidadeVagasCarros) {
 		this.quantidadeVagasCarros = quantidadeVagasCarros;
+	}
+
+	public List<Veiculo> getCarrosEstacionados() {
+		return carrosEstacionados;
+	}
+
+	public void setCarrosEstacionados(List<Veiculo> carrosEstacionados) {
+		this.carrosEstacionados = carrosEstacionados;
+	}
+
+	public List<Veiculo> getMotosEstacionadas() {
+		return motosEstacionadas;
+	}
+
+	public void setMotosEstacionadas(List<Veiculo> motosEstacionadas) {
+		this.motosEstacionadas = motosEstacionadas;
+	}
+
+	public Integer getQuantidadeVagasMotos() {
+		return quantidadeVagasMotos;
 	}
 
 }
