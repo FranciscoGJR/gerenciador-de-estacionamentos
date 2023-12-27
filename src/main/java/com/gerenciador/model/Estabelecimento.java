@@ -126,9 +126,7 @@ public class Estabelecimento implements Serializable {
 	}
 	
 	public void addCarrosEstacionados(Veiculo veiculo) {
-		List<Veiculo> carrosEstacionados = this.getCarrosEstacionados();
-		carrosEstacionados.add(veiculo);
-		this.setCarrosEstacionados(carrosEstacionados);
+		this.getCarrosEstacionados().add(veiculo);
 	}
 
 	public List<Veiculo> getMotosEstacionadas() {
@@ -140,9 +138,7 @@ public class Estabelecimento implements Serializable {
 	}
 	
 	public void addMotosEstacionadas(Veiculo veiculo) {
-		List<Veiculo> motosEstacionadas = this.getCarrosEstacionados();
-		motosEstacionadas.add(veiculo);
-		this.setCarrosEstacionados(motosEstacionadas);
+		this.getCarrosEstacionados().add(veiculo);
 	}
 
 	public Integer getQuantidadeVagasMotos() {

@@ -26,8 +26,7 @@ public class VeiculoService {
 		return veiculoRepository.findById(id).orElse(null);
 	}
 
-	public Veiculo update(Veiculo veiculo, Integer idVeiculo) {
-		veiculo.setIdentificador(idVeiculo);
+	public Veiculo update(Veiculo veiculo) {
 		return veiculoRepository.save(veiculo);
 	}
 

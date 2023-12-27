@@ -37,8 +37,7 @@ public class EstabelecimentoService {
 		return estabelecimento;
 	}
 
-	public Estabelecimento update(Estabelecimento estabelecimento, Integer id) {
-		estabelecimento.setIdentificador(id);
+	public Estabelecimento update(Estabelecimento estabelecimento) {
 		return estabelecimentoRepository.save(estabelecimento);
 	}
 
@@ -65,8 +64,8 @@ public class EstabelecimentoService {
 		veiculo.setEstabelecimentoAtual(estabelecimento);
 		atualizarVeiculosEstacionados(estabelecimento, veiculo);
 
-		update(estabelecimento, idEstabelecimento);
-		veiculoService.update(veiculo, idVeiculo);
+		update(estabelecimento);
+		veiculoService.update(veiculo);
 
 		return veiculo;
 
