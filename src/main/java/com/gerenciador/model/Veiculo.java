@@ -1,8 +1,8 @@
 package com.gerenciador.model;
 
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.validation.constraints.NotNull;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,99 +20,33 @@ public class Veiculo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "veiculo_identificador")
+	@Column(name = "VEICULO_IDENTIFICADOR")
 	@NotNull
-	Integer veiculoIdentificador;
+	private Integer veiculoIdentificador;
 
-	@Column(name = "marca_do_veiculo", length = 32, nullable = false)
+	@Column(name = "MARCA_DO_VEICULO", length = 32, nullable = false)
 	@NotNull
-	String marca;
+	private String marca;
 
-	@Column(name = "cor_do_veiculo", length = 16, nullable = false)
+	@Column(name = "COR_DO_VEICULO", length = 16, nullable = false)
 	@NotNull
-	String cor;
+	private String cor;
 
-	@Column(name = "placa_do_veiculo", length = 16, nullable = false)
+	@Column(name = "PLACA_DO_VEICULO", length = 16, nullable = false)
 	@NotNull
-	String placa;
+	private String placa;
 
-	@Column(name = "tipo_do_veiculo", nullable = false)
+	@Column(name = "TIPO_DO_VEICULO", nullable = false)
 	@NotNull
-	String tipo;
+	private String tipo;
 
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "estabelecimentoIdentificador")
-	private Estabelecimento estabelecimentoAtual;
-	
-	
-	
-	public Veiculo(@NotNull Integer veiculoIdentificador, @NotNull String marca, @NotNull String cor,
-			@NotNull String placa, @NotNull String tipo, Estabelecimento estabelecimentoAtual) {
-		this.veiculoIdentificador = veiculoIdentificador;
-		this.marca = marca;
-		this.cor = cor;
-		this.placa = placa;
-		this.tipo = tipo;
-		this.estabelecimentoAtual = estabelecimentoAtual;
-	}
+	@ManyToMany
+	@JoinTable(
+			name = "ESTABELECIMENTO_VEICULO",
+			joinColumns = { @JoinColumn( name = "VEICULO_IDENTIFICADOR")},
+			inverseJoinColumns = {@JoinColumn( name = "ESTABELECIMENTO_IDENTIFICADOR")})
+	private List<Estabelecimento> estacionamentos;
 
-	public Veiculo() {
-	}
-
-	public Veiculo(String marca, String cor, String placa, String tipo) {
-		this.marca = marca;
-		this.cor = cor;
-		this.placa = placa;
-		this.tipo = tipo;
-	}
-
-	public Integer getIdentificador() {
-		return veiculoIdentificador;
-	}
-
-	public void setIdentificador(Integer identificador) {
-		this.veiculoIdentificador = identificador;
-	}
-
-	public String getMarca() {
-		return marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public String getCor() {
-		return cor;
-	}
-
-	public void setCor(String cor) {
-		this.cor = cor;
-	}
-
-	public String getPlaca() {
-		return placa;
-	}
-
-	public void setPlaca(String placa) {
-		this.placa = placa;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public Estabelecimento getEstabelecimentoAtual() {
-		return estabelecimentoAtual;
-	}
-
-	public void setEstabelecimentoAtual(Estabelecimento estabelecimentoAtual) {
-		this.estabelecimentoAtual = estabelecimentoAtual;
-	}
 
 }
+		
