@@ -20,7 +20,7 @@ public class EstabelecimentoService {
 
 	@Autowired
 	VeiculoService veiculoService;
-	
+
 	@Autowired
 	VeiculoRepository veiculoRepository;
 
@@ -49,34 +49,37 @@ public class EstabelecimentoService {
 	public Veiculo registrarEntradaDeVeiculo(Integer idEstabelecimento, Integer idVeiculo) throws Exception {
 		Estabelecimento estabelecimento = findById(idEstabelecimento);
 		Veiculo veiculo = veiculoRepository.findById(idVeiculo).orElse(null);
-		
+
 		if (veiculo.getEstabelecimentoAtual() == estabelecimento) {
 			throw new VeiculoJaEstacionadoException();
 		}
-		
-		if(veiculo.getEstabelecimentoAtual() != null) {
+
+		if (veiculo.getEstabelecimentoAtual() != null) {
 			throw new VeiculoJaEstacionadoException();
 		}
-		
+
 		if (!temVagaDisponivel(estabelecimento, veiculo)) {
 			throw new EstacionamentoSemVagaVisponívelException();
 		}
 
-		atualizarEstacionamento(estabelecimento, veiculo);
-
 		veiculo.setEstabelecimentoAtual(estabelecimento);
+		atualizarVeiculosEstacionados(estabelecimento, veiculo);
+
+		update(estabelecimento, idEstabelecimento);
+		veiculoService.update(veiculo, idVeiculo);
 
 		return veiculo;
 
 	}
 
-	private void atualizarEstacionamento(Estabelecimento estabelecimento, Veiculo veiculo) {
+	private void atualizarVeiculosEstacionados(Estabelecimento estabelecimento, Veiculo veiculo) {
 		if (veiculo.getTipo().equals("CARRO")) {
-			estabelecimento.carrosEstacionados.add(veiculo);
+			estabelecimento.addCarrosEstacionados(veiculo);
+
 		}
 
 		if (veiculo.getTipo().equals("MOTO")) {
-			estabelecimento.motosEstacionadas.add(veiculo);
+			estabelecimento.addMotosEstacionadas(veiculo);
 		}
 
 	}

@@ -52,11 +52,11 @@ public class Estabelecimento implements Serializable {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "estabelecimentoAtual")
-	public List<Veiculo> carrosEstacionados;
+	private List<Veiculo> carrosEstacionados;
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "estabelecimentoAtual")
-	public List<Veiculo> motosEstacionadas;
+	private List<Veiculo> motosEstacionadas;
 
 	public Estabelecimento() {
 
@@ -124,6 +124,12 @@ public class Estabelecimento implements Serializable {
 	public void setCarrosEstacionados(List<Veiculo> carrosEstacionados) {
 		this.carrosEstacionados = carrosEstacionados;
 	}
+	
+	public void addCarrosEstacionados(Veiculo veiculo) {
+		List<Veiculo> carrosEstacionados = this.getCarrosEstacionados();
+		carrosEstacionados.add(veiculo);
+		this.setCarrosEstacionados(carrosEstacionados);
+	}
 
 	public List<Veiculo> getMotosEstacionadas() {
 		return motosEstacionadas;
@@ -131,6 +137,12 @@ public class Estabelecimento implements Serializable {
 
 	public void setMotosEstacionadas(List<Veiculo> motosEstacionadas) {
 		this.motosEstacionadas = motosEstacionadas;
+	}
+	
+	public void addMotosEstacionadas(Veiculo veiculo) {
+		List<Veiculo> motosEstacionadas = this.getCarrosEstacionados();
+		motosEstacionadas.add(veiculo);
+		this.setCarrosEstacionados(motosEstacionadas);
 	}
 
 	public Integer getQuantidadeVagasMotos() {
