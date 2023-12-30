@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import com.gerenciador.enumerator.TipoVeiculo;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,14 +17,14 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Veiculo")
+@Table(name = "VEICULO")
 public class Veiculo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "VEICULO_IDENTIFICADOR")
+	@Column(name = "ID_VEICULO")
 	@NotNull
-	private Integer veiculoIdentificador;
+	private Integer idVeiculo;
 
 	@Column(name = "MARCA_DO_VEICULO", length = 32, nullable = false)
 	@NotNull
@@ -38,15 +40,55 @@ public class Veiculo {
 
 	@Column(name = "TIPO_DO_VEICULO", nullable = false)
 	@NotNull
-	private String tipo;
+	private TipoVeiculo tipoVeiculo;
 
 	@ManyToMany
-	@JoinTable(
-			name = "ESTABELECIMENTO_VEICULO",
-			joinColumns = { @JoinColumn( name = "VEICULO_IDENTIFICADOR")},
-			inverseJoinColumns = {@JoinColumn( name = "ESTABELECIMENTO_IDENTIFICADOR")})
-	private List<Estabelecimento> estacionamentos;
+	@JoinTable(name = "ESTACIONAMENTO_VEICULO", joinColumns = {
+			@JoinColumn(name = "ID_VEICULO") }, inverseJoinColumns = {
+					@JoinColumn(name = "ID_ESTACIONAMENTO") })
+	private List<Estacionamento> estacionamentosDoVeiculo;
 
+	public Veiculo() {
+	}
+
+	public Integer getVeiculoIdentificador() {
+		return idVeiculo;
+	}
+
+	public void setVeiculoIdentificador(Integer veiculoIdentificador) {
+		this.idVeiculo = veiculoIdentificador;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public String getCor() {
+		return cor;
+	}
+
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+
+	public String getPlaca() {
+		return placa;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+
+	public TipoVeiculo getTipo() {
+		return tipoVeiculo;
+	}
+
+	public void setTipo(TipoVeiculo tipoVeiculo) {
+		this.tipoVeiculo = tipoVeiculo;
+	}
 
 }
-		

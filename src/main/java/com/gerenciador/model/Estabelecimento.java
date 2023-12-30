@@ -10,18 +10,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "ESTABELECIMENTO")
 public class Estabelecimento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ESTABELECIMENTO_IDENTIFICADOR")
+	@Column(name = "ID_ESTABELECIMENTO")
 	@NotNull
-	Integer estabelecimentoIdentificador;
+	Integer idEstabelecimento;
 
 	@Column(name = "NOME", length = 32, nullable = false)
 	@NotNull
@@ -38,17 +40,53 @@ public class Estabelecimento implements Serializable {
 	@Column(name = "TELEFONE", length = 16, nullable = false)
 	@NotNull
 	String telefone;
-
-	@Column(name = "QUANTIDADE_VAGAS_MOTOS", nullable = false)
-	@NotNull
-	Integer quantidadeVagasMotos;
-
-	@Column(name = "QUANTIDADE_VAGAS_MOTOS", nullable = false)
-	@NotNull
-	Integer quantidadeVagasCarros;
 	
-	@ManyToMany(mappedBy = "estacionamentos")
-	private List<Veiculo> veiculosEstacionados;
+	@OneToMany(mappedBy = "estabelecimentos")
+	private List<Estacionamento> estacionamentos;
+	
+	public Estabelecimento() {
+	}
 
+	public Integer getEstabelecimentoIdentificador() {
+		return idEstabelecimento;
+	}
 
+	public void setEstabelecimentoIdentificador(Integer estabelecimentoIdentificador) {
+		this.idEstabelecimento = estabelecimentoIdentificador;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	
+	
+	
 }

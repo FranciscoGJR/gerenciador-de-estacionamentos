@@ -1,4 +1,4 @@
-package com.gerenciador.model;
+package com.gerenciador.enumerator;
 
 public enum TipoVeiculo {
 	MOTO,
