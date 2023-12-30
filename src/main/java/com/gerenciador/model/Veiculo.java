@@ -1,7 +1,5 @@
 package com.gerenciador.model;
 
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 
 import com.gerenciador.enumerator.TipoVeiculo;
@@ -11,9 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -41,22 +36,25 @@ public class Veiculo {
 	@Column(name = "TIPO_DO_VEICULO", nullable = false)
 	@NotNull
 	private TipoVeiculo tipoVeiculo;
-
-	@ManyToMany
-	@JoinTable(name = "ESTACIONAMENTO_VEICULO", joinColumns = {
-			@JoinColumn(name = "ID_VEICULO") }, inverseJoinColumns = {
-					@JoinColumn(name = "ID_ESTACIONAMENTO") })
-	private List<Estacionamento> estacionamentosDoVeiculo;
-
+	
 	public Veiculo() {
 	}
 
-	public Integer getVeiculoIdentificador() {
+	public Veiculo(@NotNull Integer idVeiculo, @NotNull String marca, @NotNull String cor, @NotNull String placa,
+			@NotNull TipoVeiculo tipoVeiculo) {
+		this.idVeiculo = idVeiculo;
+		this.marca = marca;
+		this.cor = cor;
+		this.placa = placa;
+		this.tipoVeiculo = tipoVeiculo;
+	}
+
+	public Integer getIdVeiculo() {
 		return idVeiculo;
 	}
 
-	public void setVeiculoIdentificador(Integer veiculoIdentificador) {
-		this.idVeiculo = veiculoIdentificador;
+	public void setIdVeiculo(Integer idVeiculo) {
+		this.idVeiculo = idVeiculo;
 	}
 
 	public String getMarca() {
@@ -83,12 +81,14 @@ public class Veiculo {
 		this.placa = placa;
 	}
 
-	public TipoVeiculo getTipo() {
+	public TipoVeiculo getTipoVeiculo() {
 		return tipoVeiculo;
 	}
 
-	public void setTipo(TipoVeiculo tipoVeiculo) {
+	public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
 		this.tipoVeiculo = tipoVeiculo;
 	}
 
+	
+	
 }

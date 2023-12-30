@@ -40,19 +40,29 @@ public class Estabelecimento implements Serializable {
 	@Column(name = "TELEFONE", length = 16, nullable = false)
 	@NotNull
 	String telefone;
-	
+
 	@OneToMany(mappedBy = "estabelecimentos")
 	private List<Estacionamento> estacionamentos;
-	
+
 	public Estabelecimento() {
 	}
 
-	public Integer getEstabelecimentoIdentificador() {
+	public Estabelecimento(@NotNull Integer idEstabelecimento, @NotNull String nome, @NotNull String cnpj,
+			@NotNull String endereco, @NotNull String telefone, List<Estacionamento> estacionamentos) {
+		this.idEstabelecimento = idEstabelecimento;
+		this.nome = nome;
+		this.cnpj = cnpj;
+		this.endereco = endereco;
+		this.telefone = telefone;
+		this.estacionamentos = estacionamentos;
+	}
+
+	public Integer getIdEstabelecimento() {
 		return idEstabelecimento;
 	}
 
-	public void setEstabelecimentoIdentificador(Integer estabelecimentoIdentificador) {
-		this.idEstabelecimento = estabelecimentoIdentificador;
+	public void setIdEstabelecimento(Integer idEstabelecimento) {
+		this.idEstabelecimento = idEstabelecimento;
 	}
 
 	public String getNome() {
@@ -79,14 +89,16 @@ public class Estabelecimento implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public List<Estacionamento> getEstacionamentos() {
+		return estacionamentos;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setEstacionamentos(List<Estacionamento> estacionamentos) {
+		this.estacionamentos = estacionamentos;
 	}
-	
-	
-	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }
