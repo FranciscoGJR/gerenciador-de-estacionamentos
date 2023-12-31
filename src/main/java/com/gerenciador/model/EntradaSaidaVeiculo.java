@@ -31,11 +31,11 @@ public class EntradaSaidaVeiculo {
 	private LocalDate momentoSaida;
 
 	@OneToOne()
-	@JoinColumn(name = "ID_VEICULO") // referencedColumnName = "idVeiculo"
+	@JoinColumn(name = "ID_VEICULO")
 	private Veiculo veiculo;
 
 	@OneToOne()
-	@JoinColumn(name = "ID_ESTACIONAMENTO") // referencedColumnName = "idEstacionamento"
+	@JoinColumn(name = "ID_ESTACIONAMENTO")
 	private Estacionamento estacionamento;
 
 	public EntradaSaidaVeiculo() {

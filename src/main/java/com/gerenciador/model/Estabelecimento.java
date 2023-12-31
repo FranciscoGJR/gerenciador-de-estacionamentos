@@ -48,13 +48,12 @@ public class Estabelecimento implements Serializable {
 	}
 
 	public Estabelecimento(@NotNull Integer idEstabelecimento, @NotNull String nome, @NotNull String cnpj,
-			@NotNull String endereco, @NotNull String telefone, List<Estacionamento> estacionamentos) {
+			@NotNull String endereco, @NotNull String telefone) {
 		this.idEstabelecimento = idEstabelecimento;
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.endereco = endereco;
 		this.telefone = telefone;
-		this.estacionamentos = estacionamentos;
 	}
 
 	public Integer getIdEstabelecimento() {

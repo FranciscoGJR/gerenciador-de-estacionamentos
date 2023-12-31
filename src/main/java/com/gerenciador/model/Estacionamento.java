@@ -46,6 +46,7 @@ public class Estacionamento {
 	public Estacionamento(@NotNull Integer idEstacionamento, @NotNull Integer quantidadeVagasMotos,
 			@NotNull Integer quantidadeVagasCarros, @NotNull Integer quantTotalVagas, Integer quantVagasOcupadas,
 			Estabelecimento estabelecimentos) {
+		super();
 		this.idEstacionamento = idEstacionamento;
 		this.quantidadeVagasMotos = quantidadeVagasMotos;
 		this.quantidadeVagasCarros = quantidadeVagasCarros;
