@@ -18,20 +18,16 @@ public class VeiculoService {
 		return null;
 	}
 
-	public Veiculo save() {
-		return null;
+	public Veiculo save(Veiculo veiculo) {
+		return veiculoRepository.save(veiculo);
 	}
 
 	public Veiculo findById(Integer id) {
 		return veiculoRepository.findById(id).orElse(null);
 	}
 
-	public List<Veiculo> findByNome() {
-		return null;
-	}
-
-	public void update() {
-		return;
+	public Veiculo update(Veiculo veiculo) {
+		return veiculoRepository.save(veiculo);
 	}
 
 	public void delete() {

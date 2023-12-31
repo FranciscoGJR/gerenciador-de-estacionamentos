@@ -21,12 +21,12 @@ public class EstabeleciementoController {
 	@Autowired
 	private EstabelecimentoService estabelecimentoService;
 
-	@PutMapping("/entrada/{idEstabeleciemento}/{idVeiculo}")
-	public Veiculo entradaDeVeiculo(@PathVariable("idEstabeleciemento") Integer idEstabeleciemento,
-			@PathVariable("idVeiculo") Integer idVeiculo) throws Exception {
-
-		return estabelecimentoService.registrarEntradaDeVeiculo(idEstabeleciemento, idVeiculo);
-	}
+//	@PutMapping("/entrada/{idEstabeleciemento}/{idVeiculo}")
+//	public Veiculo entradaDeVeiculo(@PathVariable("idEstabeleciemento") Integer idEstabeleciemento,
+//			@PathVariable("idVeiculo") Integer idVeiculo) throws Exception {
+//
+//		return estabelecimentoService.registrarEntradaDeVeiculo(idEstabeleciemento, idVeiculo);
+//	}
 
 	@GetMapping
 	public ResponseEntity<List<Estabelecimento>> getEstabelecimento() {

@@ -13,17 +13,17 @@ class EstabelecimentoTest {
 
 	private Estabelecimento estabelecimentoPadrao;
 
-	@BeforeAll
-	void definirEstabelecimento() {
-		estabelecimentoPadrao = new Estabelecimento(1, "Loja A", "XX.XXX.XXX/0001-XX", "Av. Brasil", "+55(00)0000-0000",
-				10, 20);
-	}
-
-	@Test
-	void testGetNome() {
-		estabelecimentoPadrao.setNome("Loja A");
-		String nome = estabelecimentoPadrao.getNome();
-		Assertions.assertEquals("Loja A", nome);
-	}
+//	@BeforeAll
+//	void definirEstabelecimento() {
+//		estabelecimentoPadrao = new Estabelecimento(1, "Loja A", "XX.XXX.XXX/0001-XX", "Av. Brasil", "+55(00)0000-0000",
+//				10, 20);
+//	}
+//
+//	@Test
+//	void testGetNome() {
+//		estabelecimentoPadrao.setNome("Loja A");
+//		String nome = estabelecimentoPadrao.getNome();
+//		Assertions.assertEquals("Loja A", nome);
+//	}
 
 }

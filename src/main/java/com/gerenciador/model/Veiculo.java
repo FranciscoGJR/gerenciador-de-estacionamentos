@@ -2,76 +2,59 @@ package com.gerenciador.model;
 
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.gerenciador.enumerator.TipoVeiculo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Veiculo")
+@Table(name = "VEICULO")
 public class Veiculo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "veiculo_identificador")
+	@Column(name = "ID_VEICULO")
 	@NotNull
-	Integer veiculoIdentificador;
+	private Integer idVeiculo;
 
-	@Column(name = "marca_do_veiculo", length = 32, nullable = false)
+	@Column(name = "MARCA_DO_VEICULO", length = 32, nullable = false)
 	@NotNull
-	String marca;
+	private String marca;
 
-	@Column(name = "cor_do_veiculo", length = 16, nullable = false)
+	@Column(name = "COR_DO_VEICULO", length = 16, nullable = false)
 	@NotNull
-	String cor;
+	private String cor;
 
-	@Column(name = "placa_do_veiculo", length = 16, nullable = false)
+	@Column(name = "PLACA_DO_VEICULO", length = 16, nullable = false)
 	@NotNull
-	String placa;
+	private String placa;
 
-	@Column(name = "tipo_do_veiculo", nullable = false)
+	@Column(name = "TIPO_DO_VEICULO", nullable = false)
 	@NotNull
-	String tipo;
-
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "estabelecimentoIdentificador")
-	private Estabelecimento estabelecimentoAtual;
+	private TipoVeiculo tipoVeiculo;
 	
-	
-	
-	public Veiculo(@NotNull Integer veiculoIdentificador, @NotNull String marca, @NotNull String cor,
-			@NotNull String placa, @NotNull String tipo, Estabelecimento estabelecimentoAtual) {
-		this.veiculoIdentificador = veiculoIdentificador;
-		this.marca = marca;
-		this.cor = cor;
-		this.placa = placa;
-		this.tipo = tipo;
-		this.estabelecimentoAtual = estabelecimentoAtual;
-	}
-
 	public Veiculo() {
 	}
 
-	public Veiculo(String marca, String cor, String placa, String tipo) {
+	public Veiculo(@NotNull Integer idVeiculo, @NotNull String marca, @NotNull String cor, @NotNull String placa,
+			@NotNull TipoVeiculo tipoVeiculo) {
+		this.idVeiculo = idVeiculo;
 		this.marca = marca;
 		this.cor = cor;
 		this.placa = placa;
-		this.tipo = tipo;
+		this.tipoVeiculo = tipoVeiculo;
 	}
 
-	public Integer getIdentificador() {
-		return veiculoIdentificador;
+	public Integer getIdVeiculo() {
+		return idVeiculo;
 	}
 
-	public void setIdentificador(Integer identificador) {
-		this.veiculoIdentificador = identificador;
+	public void setIdVeiculo(Integer idVeiculo) {
+		this.idVeiculo = idVeiculo;
 	}
 
 	public String getMarca() {
@@ -98,20 +81,14 @@ public class Veiculo {
 		this.placa = placa;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public TipoVeiculo getTipoVeiculo() {
+		return tipoVeiculo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
+		this.tipoVeiculo = tipoVeiculo;
 	}
 
-	public Estabelecimento getEstabelecimentoAtual() {
-		return estabelecimentoAtual;
-	}
-
-	public void setEstabelecimentoAtual(Estabelecimento estabelecimentoAtual) {
-		this.estabelecimentoAtual = estabelecimentoAtual;
-	}
-
+	
+	
 }

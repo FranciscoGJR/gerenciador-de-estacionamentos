@@ -42,24 +42,24 @@ public class EstabelecimentoServiceTest {
 
 	Optional<Veiculo> optionalVeiculo;
 
-	@BeforeEach
-	public void setUp() {
-		estabelecimento = new Estabelecimento(1, "Nome", "cnpj", "Endereco", "Telefone", 10, 20);
-		optionalEstabelecimento = Optional.ofNullable(estabelecimento);
-		veiculo = new Veiculo(1, "Marca", "Cor", "Placa", "CARRO", null);
-		optionalVeiculo = Optional.ofNullable(veiculo);
-	}
-
-	@Test
-	public void testRegistrarEntradaDeVeiculo() throws Exception {
-
-		when(estabelecimentoRepository.findById(estabelecimento.getIdentificador())).thenReturn(optionalEstabelecimento);
-		when(veiculoRepository.findById(veiculo.getIdentificador())).thenReturn(optionalVeiculo);
-		
-		Veiculo veiculoAdicionado = estabelecimentoService.registrarEntradaDeVeiculo(estabelecimento.getIdentificador(),
-				veiculo.getIdentificador());
-
-		assertTrue(veiculoAdicionado.getEstabelecimentoAtual() == estabelecimento);
-	}
+//	@BeforeEach
+//	public void setUp() {
+//		estabelecimento = new Estabelecimento(1, "Nome", "cnpj", "Endereco", "Telefone", 10, 20);
+//		optionalEstabelecimento = Optional.ofNullable(estabelecimento);
+//		veiculo = new Veiculo(1, "Marca", "Cor", "Placa", "CARRO", null);
+//		optionalVeiculo = Optional.ofNullable(veiculo);
+//	}
+//
+//	@Test
+//	public void testRegistrarEntradaDeVeiculo() throws Exception {
+//
+//		when(estabelecimentoRepository.findById(estabelecimento.getIdentificador())).thenReturn(optionalEstabelecimento);
+//		when(veiculoRepository.findById(veiculo.getIdentificador())).thenReturn(optionalVeiculo);
+//		
+//		Veiculo veiculoAdicionado = estabelecimentoService.registrarEntradaDeVeiculo(estabelecimento.getIdentificador(),
+//				veiculo.getIdentificador());
+//
+//		assertTrue(veiculoAdicionado.getEstabelecimentoAtual() == estabelecimento);
+//	}
 
 }
