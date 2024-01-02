@@ -1,6 +1,7 @@
 package com.gerenciador.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,8 @@ public class VeiculoService {
 	}
 
 	public Veiculo findById(Integer id) {
-		return veiculoRepository.findById(id).orElse(null);
+		Optional<Veiculo> veiculo = veiculoRepository.findById(id);
+		return veiculo.orElse(null);
 	}
 
 	public Veiculo update(Veiculo veiculo) {
