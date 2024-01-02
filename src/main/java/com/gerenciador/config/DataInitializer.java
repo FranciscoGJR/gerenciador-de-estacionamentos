@@ -36,9 +36,9 @@ public class DataInitializer implements CommandLineRunner {
 	private Estabelecimento estabelecimento1 = new Estabelecimento(1, "Nome 0", "CNPJ 0", "Endereco 0", "Telefone 0");
 	private Estabelecimento estabelecimento2 = new Estabelecimento(2, "Nome 1", "CNPJ 1", "Endereco 1", "Telefone 1");
 
-	private Estacionamento estacionamento1 = new Estacionamento(1, 10, 30, 40, 0, estabelecimento1);
-	private Estacionamento estacionamento2 = new Estacionamento(2, 5, 25, 30, 0, estabelecimento1);
-	private Estacionamento estacionamento3 = new Estacionamento(3, 5, 25, 30, 0, estabelecimento2);
+	private Estacionamento estacionamento1 = new Estacionamento(1, 20, 30, estabelecimento1);
+	private Estacionamento estacionamento2 = new Estacionamento(2, 3, 10, estabelecimento1);
+	private Estacionamento estacionamento3 = new Estacionamento(3, 10, 30, estabelecimento2);
 
 	private Veiculo veiculo1 = new Veiculo(1, "Marca 1", "Cor 1", "Placa 1", TipoVeiculo.CARRO);
 	private Veiculo veiculo2 = new Veiculo(2, "Marca 2", "Cor 2", "Placa 2", TipoVeiculo.CARRO);

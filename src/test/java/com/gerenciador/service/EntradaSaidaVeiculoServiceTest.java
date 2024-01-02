@@ -40,7 +40,7 @@ public class EntradaSaidaVeiculoServiceTest {
 	@BeforeEach
 	public void setUp() {
 		estabelecimento1 = new Estabelecimento(1, "OORIGEM: TESTE", "CNPJ 0", "Endereco 0", "Telefone 0");
-		estacionamento1 = new Estacionamento(1, 10, 30, 40, 0, estabelecimento1);
+		estacionamento1 = new Estacionamento(1, 10, 30, estabelecimento1);
 		veiculo1 = new Veiculo(1, "Marca 1", "Cor 1", "Placa 1", TipoVeiculo.CARRO);
 		entradaSaidaVeiculo = new EntradaSaidaVeiculo(veiculo1, estacionamento1);
 	}
