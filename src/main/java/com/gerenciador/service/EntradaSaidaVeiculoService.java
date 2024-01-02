@@ -31,15 +31,15 @@ public class EntradaSaidaVeiculoService {
 		return entradaSaidaVeiculo.orElse(null);
 	}
 
-	public EntradaSaidaVeiculo registrarEntradaDeVeiculo(Integer idEstacionamento, Integer idVeiculo) {
+	public EntradaSaidaVeiculo registrarEntradaDeVeiculo(Integer idEstacionamento, Integer idVeiculo) throws Exception {
 		Estacionamento estacionamento = estacionamentoService.findById(idEstacionamento);
 		Veiculo veiculo = veiculoService.findById(idVeiculo);
-
+		
+		estacionamentoService.temVagaDisponivel(idEstacionamento, veiculo.getTipoVeiculo());
+		
 		EntradaSaidaVeiculo entradaSaidaVeiculo = new EntradaSaidaVeiculo(veiculo, estacionamento);
 
-		this.save(entradaSaidaVeiculo);
-		
-		return entradaSaidaVeiculo;
+		return save(entradaSaidaVeiculo);
 	}
 
 }
