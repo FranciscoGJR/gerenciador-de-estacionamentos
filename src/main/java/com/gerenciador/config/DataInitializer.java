@@ -8,22 +8,29 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.gerenciador.enumerator.TipoVeiculo;
+import com.gerenciador.model.EntradaSaidaVeiculo;
 import com.gerenciador.model.Estabelecimento;
 import com.gerenciador.model.Estacionamento;
 import com.gerenciador.model.Veiculo;
 import com.gerenciador.repository.EstabelecimentoRepository;
 import com.gerenciador.repository.EstacionamentoRepository;
 import com.gerenciador.repository.VeiculoRepository;
+import com.gerenciador.service.EntradaSaidaVeiculoService;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
 
 	@Autowired
 	private EstabelecimentoRepository estabelecimentoRepository;
+	
 	@Autowired
 	private EstacionamentoRepository estacionamentoRepository;
+	
 	@Autowired
 	private VeiculoRepository veiculoRepository;
+	
+	@Autowired
+	private EntradaSaidaVeiculoService entradaSaidaVeiculoService;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -74,6 +81,8 @@ public class DataInitializer implements CommandLineRunner {
 		veiculoRepository.save(veiculo2);
 		veiculoRepository.save(veiculo3);
 		veiculoRepository.save(veiculo4);
+		
+		EntradaSaidaVeiculo entradaSaidaVeiculo1 = entradaSaidaVeiculoService.registrarEntradaDeVeiculo(estacionamento1.getIdEstacionamento(), veiculo1.getIdVeiculo()); 
 	}
 
 }

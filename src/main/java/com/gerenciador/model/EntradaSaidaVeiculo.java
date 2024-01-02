@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "ENTRADA_SAIDA_VEICULO")
-public class EntradaSaidaVeiculo {
+public class  EntradaSaidaVeiculo{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,10 @@ public class EntradaSaidaVeiculo {
 
 	@Column(name = "MOMENTO_ENTRADA", nullable = false)
 	@NotNull
-	private LocalDate momentoEntrada;
+	private LocalDate momentoEntrada = LocalDate.now();
 
 	@Column(name = "MOMENTO_SAIDA")
-	private LocalDate momentoSaida;
+	private LocalDate momentoSaida = LocalDate.MIN;
 
 	@OneToOne()
 	@JoinColumn(name = "ID_VEICULO")
@@ -42,10 +42,14 @@ public class EntradaSaidaVeiculo {
 	}
 
 	public EntradaSaidaVeiculo(@NotNull Integer idEntradaSaidaVeiculo, @NotNull LocalDate momentoEntrada,
-			LocalDate momentoSaida, Veiculo veiculo, Estacionamento estacionamento) {
+			Veiculo veiculo, Estacionamento estacionamento) {
 		this.idEntradaSaidaVeiculo = idEntradaSaidaVeiculo;
 		this.momentoEntrada = momentoEntrada;
-		this.momentoSaida = momentoSaida;
+		this.veiculo = veiculo;
+		this.estacionamento = estacionamento;
+	}
+	
+	public EntradaSaidaVeiculo( Veiculo veiculo, Estacionamento estacionamento) {
 		this.veiculo = veiculo;
 		this.estacionamento = estacionamento;
 	}
