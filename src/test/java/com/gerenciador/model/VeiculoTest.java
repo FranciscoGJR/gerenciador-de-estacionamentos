@@ -1,4 +1,4 @@
-package com.gerenciador.veiculo;
+package com.gerenciador.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
