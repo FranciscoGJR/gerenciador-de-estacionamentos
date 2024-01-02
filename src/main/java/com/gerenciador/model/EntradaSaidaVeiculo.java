@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
+import com.gerenciador.enumerator.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,10 @@ public class  EntradaSaidaVeiculo{
 
 	@Column(name = "MOMENTO_SAIDA")
 	private LocalDate momentoSaida = LocalDate.MIN;
+	
+	@Column(name = "STATUS", nullable = false)
+	@NotNull
+	private Status status = Status.NAO_CONCLUIDO; 
 
 	@OneToOne()
 	@JoinColumn(name = "ID_VEICULO")
