@@ -33,7 +33,7 @@ public class DataInitializer implements CommandLineRunner {
 		Estacionamento estacionamento1 = new Estacionamento(1, 10, 30, 40, 0, estabelecimento1);
 		Estacionamento estacionamento2 = new Estacionamento(2, 5, 25, 30, 0, estabelecimento1);
 		Estacionamento estacionamento3 = new Estacionamento(3, 5, 25, 30, 0, estabelecimento2);
-//
+
 		Veiculo veiculo1 = new Veiculo(1, "Marca 1", "Cor 1", "Placa 1", TipoVeiculo.CARRO);
 		Veiculo veiculo2 = new Veiculo(2, "Marca 2", "Cor 2", "Placa 2", TipoVeiculo.CARRO);
 		Veiculo veiculo3 = new Veiculo(3, "Marca 3", "Cor 3", "Placa 3", TipoVeiculo.MOTO);
