@@ -14,12 +14,13 @@ import com.gerenciador.repository.EntradaSaidaVeiculoRepository;
 public class EntradaSaidaVeiculoService {
 
 	@Autowired
-	EstacionamentoService estacionamentoService;
+	private EstacionamentoService estacionamentoService;
 
 	@Autowired
-	EntradaSaidaVeiculoRepository entradaSaidaVeiculoRepository;
+	private EntradaSaidaVeiculoRepository entradaSaidaVeiculoRepository;
+	
 	@Autowired
-	VeiculoService veiculoService;
+	private VeiculoService veiculoService;
 
 	public EntradaSaidaVeiculo save(EntradaSaidaVeiculo entradaSaidaVeiculo) {
 		return entradaSaidaVeiculoRepository.save(entradaSaidaVeiculo);
@@ -36,7 +37,9 @@ public class EntradaSaidaVeiculoService {
 
 		EntradaSaidaVeiculo entradaSaidaVeiculo = new EntradaSaidaVeiculo(veiculo, estacionamento);
 
-		return this.save(entradaSaidaVeiculo);
+		this.save(entradaSaidaVeiculo);
+		
+		return entradaSaidaVeiculo;
 	}
 
 }
