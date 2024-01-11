@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gerenciador.enumerator.TipoVeiculo;
-import com.gerenciador.exception.EstacionamentoSemVagaVisponívelException;
 import com.gerenciador.model.Estacionamento;
 import com.gerenciador.repository.EstacionamentoRepository;
 
@@ -21,22 +20,17 @@ public class EstacionamentoService {
 		return estacionamento.orElse(null);
 	}
 
-	public boolean temVagaDisponivel(Integer idEstacionamento, TipoVeiculo tipoVeiculo) throws Exception {	
+	public Integer quantidadeVagasDisponiveis(Integer idEstacionamento, TipoVeiculo tipoVeiculo) throws Exception {	
 		Estacionamento estacionamento = this.findById(idEstacionamento);
 		
-		
 		if(tipoVeiculo == TipoVeiculo.CARRO) {
-			if(estacionamento.getQuantVagasCarrosOcupadas() == estacionamento.getQuantTotalVagasCarros()) {
-				throw new EstacionamentoSemVagaVisponívelException();
-			}
+			return estacionamento.getQuantTotalVagasCarros() - estacionamento.getQuantVagasCarrosOcupadas();
 		}
 		
 		if(tipoVeiculo == TipoVeiculo.MOTO) {
-			if(estacionamento.getQuantTotalVagasMotos() == estacionamento.getQuantVagasMotosOcupadas()) {
-				throw new EstacionamentoSemVagaVisponívelException();
-			}
+			return estacionamento.getQuantTotalVagasMotos() - estacionamento.getQuantVagasMotosOcupadas();
 		}
-			
-		return true;
+		
+		return null;
 	}
 }

@@ -1,6 +1,7 @@
 package com.gerenciador.service;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -49,7 +50,7 @@ public class EntradaSaidaVeiculoServiceTest {
 	public void testRegistrarEntradaDeVeiculo() throws Exception{
 		when(estacionamentoService.findById(estacionamento1.getIdEstacionamento())).thenReturn(estacionamento1);
 		when(veiculoService.findById(veiculo1.getIdVeiculo())).thenReturn(veiculo1);
-//		when(entradaSaidaVeiculoRepository.save(entradaSaidaVeiculo)).thenReturn(entradaSaidaVeiculo);
+		when(entradaSaidaVeiculoRepository.save(any())).thenReturn(entradaSaidaVeiculo);
 		
 		entradaSaidaVeiculo = entradaSaidaVeiculoService.registrarEntradaDeVeiculo(estacionamento1.getIdEstacionamento(), veiculo1.getIdVeiculo());
 
