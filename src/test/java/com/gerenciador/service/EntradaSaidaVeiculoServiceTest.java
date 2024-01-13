@@ -48,8 +48,13 @@ public class EntradaSaidaVeiculoServiceTest {
 	
 	@Test
 	public void testRegistrarEntradaDeVeiculo() throws Exception{
-		when(estacionamentoService.findById(estacionamento1.getIdEstacionamento())).thenReturn(estacionamento1);
-		when(veiculoService.findById(veiculo1.getIdVeiculo())).thenReturn(veiculo1);
+		Integer idEstacionamento = estacionamento1.getIdEstacionamento();
+		Integer idVeiculo = veiculo1.getIdVeiculo();
+		
+		when(estacionamentoService.findById(idEstacionamento )).thenReturn(estacionamento1);
+		when(estacionamentoService.quantidadeVagasDisponiveis(idEstacionamento, veiculo1.getTipoVeiculo())).thenReturn(10);
+		when(veiculoService.findById(idVeiculo)).thenReturn(veiculo1);
+		when(entradaSaidaVeiculoRepository.veiculoJaEstacionado(idVeiculo, idEstacionamento)).thenReturn(null);
 		when(entradaSaidaVeiculoRepository.save(any())).thenReturn(entradaSaidaVeiculo);
 		
 		entradaSaidaVeiculo = entradaSaidaVeiculoService.registrarEntradaDeVeiculo(estacionamento1.getIdEstacionamento(), veiculo1.getIdVeiculo());
