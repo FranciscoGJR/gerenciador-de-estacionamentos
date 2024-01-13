@@ -33,9 +33,11 @@ public class EntradaSaidaVeiculoService {
 		return entradaSaidaVeiculo.orElse(null);
 	}
 	
-	public Veiculo veiculoJaEstacionado(Integer idVeiculo, Integer idEstacionamento) {
-		
-		return entradaSaidaVeiculoRepository.veiculoJaEstacionado(idEstacionamento, idVeiculo);
+	public boolean veiculoJaEstacionado(Integer idVeiculo, Integer idEstacionamento) {
+		if(entradaSaidaVeiculoRepository.veiculoJaEstacionado(idEstacionamento, idVeiculo) == null) {
+			return false;
+		}
+		return true;
 	}
 
 	public EntradaSaidaVeiculo registrarEntradaDeVeiculo(Integer idEstacionamento, Integer idVeiculo) throws Exception {
@@ -46,10 +48,9 @@ public class EntradaSaidaVeiculoService {
 			throw new EstacionamentoSemVagaVisponívelException();
 		}
 		
-		if(this.veiculoJaEstacionado(idVeiculo, idEstacionamento) != null) {
+		if(veiculoJaEstacionado(idVeiculo, idEstacionamento)) {
 			throw new VeiculoJaEstacionadoException();
 		}
-		
 		
 		EntradaSaidaVeiculo entradaSaidaVeiculo = new EntradaSaidaVeiculo(veiculo, estacionamento);
 

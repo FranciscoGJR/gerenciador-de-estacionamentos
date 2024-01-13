@@ -2,6 +2,8 @@ package com.gerenciador.model;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +39,7 @@ public class Estacionamento {
 	@NotNull
 	private Integer quantVagasCarrosOcupadas = 0;
 
+	@JsonBackReference
 	@ManyToOne()
 	@JoinColumn(name = "ID_ESTABELECIMENTO", nullable = false)
 	private Estabelecimento estabelecimentos;

@@ -13,6 +13,7 @@ import com.gerenciador.model.EntradaSaidaVeiculo;
 import com.gerenciador.model.Estabelecimento;
 import com.gerenciador.model.Estacionamento;
 import com.gerenciador.model.Veiculo;
+import com.gerenciador.repository.EntradaSaidaVeiculoRepository;
 import com.gerenciador.repository.EstabelecimentoRepository;
 import com.gerenciador.repository.EstacionamentoRepository;
 import com.gerenciador.repository.VeiculoRepository;
@@ -29,7 +30,7 @@ public class DataInitializer implements CommandLineRunner {
 
 	@Autowired
 	private VeiculoRepository veiculoRepository;
-
+	
 	@Autowired
 	private EntradaSaidaVeiculoService entradaSaidaVeiculoService;
 
@@ -73,15 +74,8 @@ public class DataInitializer implements CommandLineRunner {
 
 		Integer idEstacionamento1 = estacionamento1.getIdEstacionamento();
 		Integer idVeiculo1 = veiculo1.getIdVeiculo();
-		entradaSaidaVeiculo1 = entradaSaidaVeiculoService.registrarEntradaDeVeiculo(idEstacionamento1, idVeiculo1);
-	}
-
-	public EntradaSaidaVeiculo getEntradaSaidaVeiculo() {
-		return entradaSaidaVeiculo1;
-	}
-
-	public void setEntradaSaidaVeiculo(EntradaSaidaVeiculo entradaSaidaVeiculo1) {
-		this.entradaSaidaVeiculo1 = entradaSaidaVeiculo1;
+		EntradaSaidaVeiculo entradaSaidaVeiculo1 = entradaSaidaVeiculoService.registrarEntradaDeVeiculo(idEstacionamento1, idVeiculo1);
+		
 	}
 
 }

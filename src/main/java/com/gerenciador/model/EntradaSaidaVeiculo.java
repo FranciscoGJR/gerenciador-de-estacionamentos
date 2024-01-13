@@ -8,11 +8,13 @@ import com.gerenciador.enumerator.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,17 +32,18 @@ public class  EntradaSaidaVeiculo{
 	private LocalDate momentoEntrada = LocalDate.now();
 
 	@Column(name = "MOMENTO_SAIDA")
-	private LocalDate momentoSaida = LocalDate.MIN;
+	private LocalDate momentoSaida = null;
 	
 	@Column(name = "STATUS", nullable = false)
 	@NotNull
+    @Enumerated(EnumType.STRING)
 	private Status status = Status.NAO_CONCLUIDO; 
 
-	@OneToOne()
+	@ManyToOne()
 	@JoinColumn(name = "ID_VEICULO")
 	private Veiculo veiculo;
 
-	@OneToOne()
+	@ManyToOne()
 	@JoinColumn(name = "ID_ESTACIONAMENTO")
 	private Estacionamento estacionamento;
 

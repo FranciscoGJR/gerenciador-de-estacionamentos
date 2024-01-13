@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gerenciador.model.EntradaSaidaVeiculo;
 import com.gerenciador.model.Estabelecimento;
-import com.gerenciador.model.Veiculo;
+import com.gerenciador.service.EntradaSaidaVeiculoService;
 import com.gerenciador.service.EstabelecimentoService;
 
 @RestController
@@ -20,13 +21,16 @@ public class EstabeleciementoController {
 
 	@Autowired
 	private EstabelecimentoService estabelecimentoService;
+	
+	@Autowired
+	private EntradaSaidaVeiculoService entradaSaidaVeiculoService;
 
-//	@PutMapping("/entrada/{idEstabeleciemento}/{idVeiculo}")
-//	public Veiculo entradaDeVeiculo(@PathVariable("idEstabeleciemento") Integer idEstabeleciemento,
-//			@PathVariable("idVeiculo") Integer idVeiculo) throws Exception {
-//
-//		return estabelecimentoService.registrarEntradaDeVeiculo(idEstabeleciemento, idVeiculo);
-//	}
+	@PutMapping("/entrada/{idEstabeleciemento}/{idVeiculo}")
+	public EntradaSaidaVeiculo entradaDeVeiculo(@PathVariable("idEstabeleciemento") Integer idEstabeleciemento,
+			@PathVariable("idVeiculo") Integer idVeiculo) throws Exception {
+		EntradaSaidaVeiculo entradaSaidaVeiculo = entradaSaidaVeiculoService.registrarEntradaDeVeiculo(idEstabeleciemento, idVeiculo);
+		return entradaSaidaVeiculo;
+	}
 
 	@GetMapping
 	public ResponseEntity<List<Estabelecimento>> getEstabelecimento() {
