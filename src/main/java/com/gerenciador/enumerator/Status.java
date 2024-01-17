@@ -2,6 +2,7 @@ package com.gerenciador.enumerator;
 
 public enum Status {
 	NAO_CONCLUIDO("NaoConcluido"),
+	PAGO("Pago"),
 	CONCLUIDO("Concluido"),
 	ARQUIVADO("Arquivado");
 	
