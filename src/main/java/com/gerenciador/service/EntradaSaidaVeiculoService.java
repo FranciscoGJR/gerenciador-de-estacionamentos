@@ -1,10 +1,12 @@
 package com.gerenciador.service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gerenciador.enumerator.Status;
 import com.gerenciador.exception.EstacionamentoSemVagaVisponívelException;
 import com.gerenciador.exception.VeiculoJaEstacionadoException;
 import com.gerenciador.model.EntradaSaidaVeiculo;
@@ -20,21 +22,21 @@ public class EntradaSaidaVeiculoService {
 
 	@Autowired
 	private EntradaSaidaVeiculoRepository entradaSaidaVeiculoRepository;
-	
+
 	@Autowired
 	private VeiculoService veiculoService;
 
 	public EntradaSaidaVeiculo save(EntradaSaidaVeiculo entradaSaidaVeiculo) {
 		return entradaSaidaVeiculoRepository.save(entradaSaidaVeiculo);
 	}
-	
+
 	public EntradaSaidaVeiculo findById(Integer id) {
 		Optional<EntradaSaidaVeiculo> entradaSaidaVeiculo = entradaSaidaVeiculoRepository.findById(id);
 		return entradaSaidaVeiculo.orElse(null);
 	}
-	
+
 	public boolean veiculoJaEstacionado(Integer idVeiculo, Integer idEstacionamento) {
-		if(entradaSaidaVeiculoRepository.veiculoJaEstacionado(idEstacionamento, idVeiculo) == null) {
+		if (entradaSaidaVeiculoRepository.veiculoJaEstacionado(idEstacionamento, idVeiculo) == null) {
 			return false;
 		}
 		return true;
@@ -43,32 +45,35 @@ public class EntradaSaidaVeiculoService {
 	public EntradaSaidaVeiculo registrarEntradaDeVeiculo(Integer idEstacionamento, Integer idVeiculo) throws Exception {
 		Estacionamento estacionamento = estacionamentoService.findById(idEstacionamento);
 		Veiculo veiculo = veiculoService.findById(idVeiculo);
-		
-		if(estacionamentoService.quantidadeVagasDisponiveis(idEstacionamento, veiculo.getTipoVeiculo()) == 0) {
+
+		if (estacionamentoService.quantidadeVagasDisponiveis(idEstacionamento, veiculo.getTipoVeiculo()) == 0) {
 			throw new EstacionamentoSemVagaVisponívelException();
 		}
-		
-		if(veiculoJaEstacionado(idVeiculo, idEstacionamento)) {
+
+		if (veiculoJaEstacionado(idVeiculo, idEstacionamento)) {
 			throw new VeiculoJaEstacionadoException();
 		}
-		
+
 		EntradaSaidaVeiculo entradaSaidaVeiculo = new EntradaSaidaVeiculo(veiculo, estacionamento);
 
 		return save(entradaSaidaVeiculo);
 	}
 
-	public EntradaSaidaVeiculo registrarSaidaDeVeiculo(Integer idEstacionamento, Integer idVeiculo) {
+	public EntradaSaidaVeiculo registrarSaidaDeVeiculo(Integer idEntradaVeiculo) throws Exception {
+		EntradaSaidaVeiculo entradaVeiculo = this.findById(idEntradaVeiculo);
+		
+		if(entradaVeiculo.getStatus() != Status.PAGO) {
+			throw new Exception();
+		}
 
-		// TODO: encontrar Estacionamento 
-		// TODO: encontrar Veiculo
+		entradaVeiculo.setStatus(Status.CONCLUIDO);
+
+		entradaVeiculo.setMomentoSaida(LocalDate.now());
 		
-		// TODO: exececao-> veiculo nao estacionado
+		entradaSaidaVeiculoRepository.save(entradaVeiculo);
 		
-		// TODO: criar registro de Entrada Saida Veiculo
-		
-		// TODO: salvar registro de Entrada Saida Veiculo
-		
-		return null;
+		return entradaVeiculo;
 	}
 
 }
+ 

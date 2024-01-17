@@ -25,7 +25,7 @@ public class EstabeleciementoController {
 	@Autowired
 	private EntradaSaidaVeiculoService entradaSaidaVeiculoService;
 
-	@PutMapping("/entrada/{idEstaionamento}/{idVeiculo}")
+	@PutMapping("/entrada/{idEstacionamento}/{idVeiculo}")
 	public EntradaSaidaVeiculo entradaDeVeiculo(@PathVariable("idEstacionamento") Integer idEstacionamento,
 			@PathVariable("idVeiculo") Integer idVeiculo) throws Exception {
 		EntradaSaidaVeiculo entradaSaidaVeiculo = entradaSaidaVeiculoService.registrarEntradaDeVeiculo(idEstacionamento,
@@ -33,11 +33,10 @@ public class EstabeleciementoController {
 		return entradaSaidaVeiculo;
 	}
 
-	@PutMapping("/saida/{idEstabelecimento}/{idVeiculo}")
-	public EntradaSaidaVeiculo saidaDeVeiculo(@PathVariable("idEstacionamento") Integer idEstacionamento,
-			@PathVariable("idVeiculo") Integer idVeiculo) {
-		EntradaSaidaVeiculo entradaSaidaVeiulo = entradaSaidaVeiculoService.registrarSaidaDeVeiculo(idEstacionamento, idVeiculo);
-		return null;
+	@PutMapping("/saida/{idEntradaVeiculo}")
+	public EntradaSaidaVeiculo saidaDeVeiculo(@PathVariable("idEntradaVeiculo") Integer idEntradaVeiculo) throws Exception {
+		EntradaSaidaVeiculo entradaVeiulo = entradaSaidaVeiculoService.registrarSaidaDeVeiculo(idEntradaVeiculo);
+		return entradaVeiulo;
 	}
 
 	@GetMapping

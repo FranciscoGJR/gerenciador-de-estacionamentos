@@ -9,4 +9,7 @@ public interface EntradaSaidaVeiculoRepository extends JpaRepository<EntradaSaid
 
 	@Query(value = "SELECT esv.id FROM EntradaSaidaVeiculo esv WHERE esv.estacionamento.id = :idEstacionamento AND esv.veiculo.id = :idVeiculo AND esv.status = 'NAO_CONCLUIDO'")
 	Integer veiculoJaEstacionado(Integer idEstacionamento, Integer idVeiculo);
+	
+	@Query(value = "SELECT esv.id FROM EntradaSaidaVeiculo esv WHERE esv.estacionamento.id = :idEstacionamento AND esv.veiculo.id = :idVeiculo AND esv.status = 'NAO_CONCLUIDO'")
+	EntradaSaidaVeiculo veiculoComStatusNaoConcluido(Integer idEstacionamento, Integer idVeiculo);
 }

@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.gerenciador.enumerator.Status;
 import com.gerenciador.enumerator.TipoVeiculo;
 import com.gerenciador.model.EntradaSaidaVeiculo;
 import com.gerenciador.model.Estabelecimento;
 import com.gerenciador.model.Estacionamento;
 import com.gerenciador.model.Veiculo;
-import com.gerenciador.repository.EntradaSaidaVeiculoRepository;
 import com.gerenciador.repository.EstabelecimentoRepository;
 import com.gerenciador.repository.EstacionamentoRepository;
 import com.gerenciador.repository.VeiculoRepository;
@@ -75,7 +75,8 @@ public class DataInitializer implements CommandLineRunner {
 		Integer idEstacionamento1 = estacionamento1.getIdEstacionamento();
 		Integer idVeiculo1 = veiculo1.getIdVeiculo();
 		EntradaSaidaVeiculo entradaSaidaVeiculo1 = entradaSaidaVeiculoService.registrarEntradaDeVeiculo(idEstacionamento1, idVeiculo1);
-		
+		entradaSaidaVeiculo1.setStatus(Status.PAGO);
+		entradaSaidaVeiculoService.save(entradaSaidaVeiculo1);
 	}
 
 }
