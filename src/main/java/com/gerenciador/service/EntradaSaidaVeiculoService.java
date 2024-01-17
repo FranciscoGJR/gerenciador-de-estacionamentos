@@ -57,4 +57,18 @@ public class EntradaSaidaVeiculoService {
 		return save(entradaSaidaVeiculo);
 	}
 
+	public EntradaSaidaVeiculo registrarSaidaDeVeiculo(Integer idEstacionamento, Integer idVeiculo) {
+
+		// TODO: encontrar Estacionamento 
+		// TODO: encontrar Veiculo
+		
+		// TODO: exececao-> veiculo nao estacionado
+		
+		// TODO: criar registro de Entrada Saida Veiculo
+		
+		// TODO: salvar registro de Entrada Saida Veiculo
+		
+		return null;
+	}
+
 }
