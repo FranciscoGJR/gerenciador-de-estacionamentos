@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.gerenciador.enumerator.Status;
 import com.gerenciador.enumerator.TipoVeiculo;
 import com.gerenciador.model.EntradaSaidaVeiculo;
 import com.gerenciador.model.Estabelecimento;
@@ -38,13 +41,15 @@ public class EntradaSaidaVeiculoServiceTest {
 	private Veiculo veiculo1;
 	private EntradaSaidaVeiculo entradaSaidaVeiculo;
 	
+	
 	@BeforeEach
 	public void setUp() {
-		estabelecimento1 = new Estabelecimento(1, "OORIGEM: TESTE", "CNPJ 0", "Endereco 0", "Telefone 0");
+		estabelecimento1 = new Estabelecimento(1, "ORIGEM 0", "CNPJ 0", "Endereco 0", "Telefone 0");
 		estacionamento1 = new Estacionamento(1, 10, 30, estabelecimento1);
 		veiculo1 = new Veiculo(1, "Marca 1", "Cor 1", "Placa 1", TipoVeiculo.CARRO);
 		entradaSaidaVeiculo = new EntradaSaidaVeiculo(veiculo1, estacionamento1);
 	}
+	
 	
 	@Test
 	public void testRegistrarEntradaDeVeiculo() throws Exception{
@@ -57,9 +62,26 @@ public class EntradaSaidaVeiculoServiceTest {
 		when(entradaSaidaVeiculoRepository.veiculoJaEstacionado(idVeiculo, idEstacionamento)).thenReturn(null);
 		when(entradaSaidaVeiculoRepository.save(any())).thenReturn(entradaSaidaVeiculo);
 		
-		entradaSaidaVeiculo = entradaSaidaVeiculoService.registrarEntradaDeVeiculo(estacionamento1.getIdEstacionamento(), veiculo1.getIdVeiculo());
+		entradaSaidaVeiculo = entradaSaidaVeiculoService.registrarEntradaDeVeiculo(idEstacionamento, idVeiculo);
 
 		assertTrue(entradaSaidaVeiculo.getEstacionamento() == estacionamento1);
 		assertTrue(entradaSaidaVeiculo.getVeiculo() == veiculo1);
 	}
+	
+	
+	@Test
+	public void testRegistrarSaidaDeVeiculo() throws Exception {
+		entradaSaidaVeiculo.setStatus(Status.PAGO);
+		Optional<EntradaSaidaVeiculo> entradaSaidaVeiculoOptional = Optional.ofNullable(entradaSaidaVeiculo);
+		Integer idEntradaSaidaVeiculo = entradaSaidaVeiculo.getIdEntradaSaidaVeiculo(); 
+		
+		when(entradaSaidaVeiculoRepository.findById(idEntradaSaidaVeiculo)).thenReturn(entradaSaidaVeiculoOptional);
+		when(entradaSaidaVeiculoRepository.save(entradaSaidaVeiculo)).thenReturn(entradaSaidaVeiculo);
+
+		entradaSaidaVeiculoService.registrarSaidaDeVeiculo(idEntradaSaidaVeiculo);
+		
+		assertTrue(entradaSaidaVeiculo.getStatus() == Status.CONCLUIDO);
+		assertTrue(entradaSaidaVeiculo.getMomentoSaida() != null);
+		}
+	
 }
