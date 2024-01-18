@@ -70,7 +70,7 @@ public class EntradaSaidaVeiculoService {
 
 		entradaVeiculo.setMomentoSaida(LocalDate.now());
 		
-		entradaSaidaVeiculoRepository.save(entradaVeiculo);
+		this.save(entradaVeiculo);
 		
 		return entradaVeiculo;
 	}
