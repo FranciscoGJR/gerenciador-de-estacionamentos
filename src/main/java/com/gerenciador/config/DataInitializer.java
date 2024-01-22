@@ -75,7 +75,7 @@ public class DataInitializer implements CommandLineRunner {
 		Integer idEstacionamento1 = estacionamento1.getIdEstacionamento();
 		Integer idVeiculo1 = veiculo1.getIdVeiculo();
 		EntradaSaidaVeiculo entradaSaidaVeiculo1 = entradaSaidaVeiculoService.registrarEntradaDeVeiculo(idEstacionamento1, idVeiculo1);
-		entradaSaidaVeiculo1.setStatus(Status.PAGO);
+		entradaSaidaVeiculo1.setStatus(Status.PAGO_E_ENTRADA_NAO_REGISTRADA);
 		entradaSaidaVeiculoService.save(entradaSaidaVeiculo1);
 		
 		entradaSaidaVeiculoService.registrarSaidaDeVeiculo(entradaSaidaVeiculo1.getIdEntradaSaidaVeiculo());

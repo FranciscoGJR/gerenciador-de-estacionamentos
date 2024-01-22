@@ -71,7 +71,7 @@ public class EntradaSaidaVeiculoServiceTest {
 	
 	@Test
 	public void testRegistrarSaidaDeVeiculo() throws Exception {
-		entradaSaidaVeiculo.setStatus(Status.PAGO);
+		entradaSaidaVeiculo.setStatus(Status.PAGO_E_ENTRADA_NAO_REGISTRADA);
 		Optional<EntradaSaidaVeiculo> entradaSaidaVeiculoOptional = Optional.ofNullable(entradaSaidaVeiculo);
 		Integer idEntradaSaidaVeiculo = entradaSaidaVeiculo.getIdEntradaSaidaVeiculo(); 
 		
@@ -80,7 +80,7 @@ public class EntradaSaidaVeiculoServiceTest {
 
 		entradaSaidaVeiculoService.registrarSaidaDeVeiculo(idEntradaSaidaVeiculo);
 		
-		assertTrue(entradaSaidaVeiculo.getStatus() == Status.CONCLUIDO);
+		assertTrue(entradaSaidaVeiculo.getStatus() == Status.SAIDA_REGISTRADA);
 		assertTrue(entradaSaidaVeiculo.getMomentoSaida() != null);
 		}
 	

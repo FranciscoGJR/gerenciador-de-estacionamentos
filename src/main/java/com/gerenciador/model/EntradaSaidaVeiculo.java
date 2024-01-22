@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import com.gerenciador.enumerator.Status;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,11 +35,15 @@ public class  EntradaSaidaVeiculo{
 
 	@Column(name = "MOMENTO_SAIDA")
 	private LocalDate momentoSaida = null;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_PAGAMENTO")
+	private Pagamento pagamento;
 	
 	@Column(name = "STATUS", nullable = false)
 	@NotNull
     @Enumerated(EnumType.STRING)
-	private Status status = Status.NAO_CONCLUIDO; 
+	private Status status = Status.ENTRADA_REGISTRADA_E_NAO_PAGA; 
 
 	@ManyToOne()
 	@JoinColumn(name = "ID_VEICULO")
@@ -111,6 +117,4 @@ public class  EntradaSaidaVeiculo{
 		this.status = status;
 	}
 	
-	
-
 }

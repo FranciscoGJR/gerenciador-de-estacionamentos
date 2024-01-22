@@ -1,10 +1,13 @@
 package com.gerenciador.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gerenciador.enumerator.Status;
+import com.gerenciador.model.EntradaSaidaVeiculo;
 import com.gerenciador.model.Estabelecimento;
 import com.gerenciador.repository.EstabelecimentoRepository;
 import com.gerenciador.repository.VeiculoRepository;
@@ -14,6 +17,9 @@ public class EstabelecimentoService {
 
 	@Autowired
 	EstabelecimentoRepository estabelecimentoRepository;
+	
+	@Autowired
+	EntradaSaidaVeiculoService entradaSaidaVeiculoService;
 
 	@Autowired
 	VeiculoService veiculoService;
@@ -21,25 +27,43 @@ public class EstabelecimentoService {
 	@Autowired
 	VeiculoRepository veiculoRepository;
 
+	
+	public BigDecimal realizarPagamento(Integer IdEntradaSaida) {
+		EntradaSaidaVeiculo entradaSaidaVeiculo = entradaSaidaVeiculoService.findById(IdEntradaSaida);
+		
+//		entradaSaidaVeiculo.setMomentoPagamento(LocalDate.now());
+		entradaSaidaVeiculo.setStatus(Status.PAGO_E_ENTRADA_NAO_REGISTRADA);
+		
+		return calcularValor();
+	}
+	
+	public BigDecimal calcularValor() {
+		return null;
+	}
+	
 	public Estabelecimento save(Estabelecimento estabelecimento) {
 		return estabelecimentoRepository.save(estabelecimento);
 	}
 
+	
 	public List<Estabelecimento> getEstabelecimento() {
 		return estabelecimentoRepository.findAll();
 	}
 
+	
 	public Estabelecimento findById(Integer id) {
 		Estabelecimento estabelecimento = estabelecimentoRepository.findById(id).orElseThrow();
 		return estabelecimento;
 	}
 
+	
 	public Estabelecimento update(Estabelecimento estabelecimento) {
 		return estabelecimentoRepository.save(estabelecimento);
 	}
 
+	
 	public void delete(Integer id) {
 		estabelecimentoRepository.deleteById(id);
 	}
-	
+
 }

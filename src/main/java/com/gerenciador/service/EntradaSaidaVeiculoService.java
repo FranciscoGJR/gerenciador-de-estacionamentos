@@ -62,11 +62,11 @@ public class EntradaSaidaVeiculoService {
 	public EntradaSaidaVeiculo registrarSaidaDeVeiculo(Integer idEntradaVeiculo) throws Exception {
 		EntradaSaidaVeiculo entradaVeiculo = this.findById(idEntradaVeiculo);
 		
-		if(entradaVeiculo.getStatus() != Status.PAGO) {
+		if(entradaVeiculo.getStatus() != Status.PAGO_E_ENTRADA_NAO_REGISTRADA) {
 			throw new Exception();
 		}
 
-		entradaVeiculo.setStatus(Status.CONCLUIDO);
+		entradaVeiculo.setStatus(Status.SAIDA_REGISTRADA);
 
 		entradaVeiculo.setMomentoSaida(LocalDate.now());
 		
