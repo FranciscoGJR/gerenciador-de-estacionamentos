@@ -103,4 +103,14 @@ public class  EntradaSaidaVeiculo{
 		this.estacionamento = estacionamento;
 	}
 
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
+	
+
 }
